@@ -1,0 +1,41 @@
+// A simple logic with an internal boolean state
+// that can be flipped, retrieved and modified.
+coco Flipper
+
+// The persistent state is used to define stateful
+// values managed intrinsically by the logic. Only
+// a single call can access these values at a time.
+state persistent:
+    value Bool
+
+// Init!() deployer is a constructor that leaves
+// the persistent state untouched at the deploy time.
+endpoint deployer Init!():
+    pass
+
+// Seed!() deployer is an alternate constructor
+// that sets given initial value for the logic state.
+endpoint deployer Seed!(initial Bool):
+    set!(initial)
+
+// Get() is an invokable that returns
+// the current value of the logic state
+endpoint invokable Get() -> (value Bool):
+    observe value <- Flipper.State.value
+
+ 
+// Set!() is an invokable that sets
+// the given value to the logic state
+endpoint invokable Set!(value Bool):
+    set!(value: value)
+
+// Toggle!() is an invokable that flips
+// the current value of the logic state
+endpoint invokable Toggle!():
+    mutate value <- Flipper.State.value:
+        value = !value
+
+// set!() is a local function that
+// sets given value to the logic state
+func set!(value Bool):
+    mutate value -> Flipper.State.value

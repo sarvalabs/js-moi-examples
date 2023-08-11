@@ -1,0 +1,206 @@
+{
+  "syntax": "0.1.0",
+  "engine": {
+    "kind": "PISA",
+    "flags": []
+  },
+  "elements": [
+    {
+      "ptr": 0,
+      "kind": "state",
+      "data": {
+        "kind": "persistent",
+        "fields": [
+          {
+            "slot": 0,
+            "label": "value",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "ptr": 1,
+      "deps": [
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "Init!",
+        "kind": "deployer",
+        "accepts": [],
+        "returns": [],
+        "executes": {
+          "bin": []
+        }
+      }
+    },
+    {
+      "ptr": 2,
+      "deps": [
+        6,
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "Seed!",
+        "kind": "deployer",
+        "accepts": [
+          {
+            "slot": 0,
+            "label": "initial",
+            "type": "bool"
+          }
+        ],
+        "returns": [],
+        "executes": {
+          "bin": [
+            10,
+            0,
+            4,
+            1,
+            0,
+            82,
+            0,
+            0,
+            1,
+            17,
+            1,
+            6,
+            12,
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 3,
+      "deps": [
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "Get",
+        "kind": "invokable",
+        "accepts": [],
+        "returns": [
+          {
+            "slot": 0,
+            "label": "value",
+            "type": "bool"
+          }
+        ],
+        "executes": {
+          "bin": [
+            128,
+            0,
+            0,
+            5,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 4,
+      "deps": [
+        6,
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "Set!",
+        "kind": "invokable",
+        "accepts": [
+          {
+            "slot": 0,
+            "label": "value",
+            "type": "bool"
+          }
+        ],
+        "returns": [],
+        "executes": {
+          "bin": [
+            10,
+            0,
+            4,
+            1,
+            0,
+            82,
+            0,
+            0,
+            1,
+            17,
+            1,
+            6,
+            12,
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 5,
+      "deps": [
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "Toggle!",
+        "kind": "invokable",
+        "accepts": [],
+        "returns": [],
+        "executes": {
+          "bin": [
+            128,
+            0,
+            0,
+            98,
+            1,
+            0,
+            36,
+            0,
+            1,
+            129,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 6,
+      "deps": [
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "set!",
+        "kind": "local",
+        "accepts": [
+          {
+            "slot": 0,
+            "label": "value",
+            "type": "bool"
+          }
+        ],
+        "returns": [],
+        "executes": {
+          "bin": [
+            4,
+            0,
+            0,
+            129,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,345 @@
+{
+	"Name": "Flipper",
+	"Ready": false,
+	"Manifest": {
+		"syntax": "0.1.0",
+		"engine": {
+			"kind": "PISA",
+			"flags": []
+		},
+		"elements": [
+			{
+				"ptr": 0,
+				"deps": null,
+				"kind": "state",
+				"data": {
+					"kind": "persistent",
+					"fields": [
+						{
+							"slot": 0,
+							"label": "value",
+							"type": "bool"
+						}
+					]
+				}
+			},
+			{
+				"ptr": 1,
+				"deps": [
+					0
+				],
+				"kind": "routine",
+				"data": {
+					"name": "Init!",
+					"kind": "deployer",
+					"accepts": [],
+					"returns": [],
+					"executes": {
+						"bin": [],
+						"hex": "",
+						"asm": null
+					},
+					"catches": null
+				}
+			},
+			{
+				"ptr": 2,
+				"deps": [
+					6,
+					0
+				],
+				"kind": "routine",
+				"data": {
+					"name": "Seed!",
+					"kind": "deployer",
+					"accepts": [
+						{
+							"slot": 0,
+							"label": "initial",
+							"type": "bool"
+						}
+					],
+					"returns": [],
+					"executes": {
+						"bin": [
+							10,
+							0,
+							4,
+							1,
+							0,
+							82,
+							0,
+							0,
+							1,
+							17,
+							1,
+							6,
+							12,
+							0,
+							1,
+							0
+						],
+						"hex": "",
+						"asm": null
+					},
+					"catches": null
+				}
+			},
+			{
+				"ptr": 3,
+				"deps": [
+					0
+				],
+				"kind": "routine",
+				"data": {
+					"name": "Get",
+					"kind": "invokable",
+					"accepts": [],
+					"returns": [
+						{
+							"slot": 0,
+							"label": "value",
+							"type": "bool"
+						}
+					],
+					"executes": {
+						"bin": [
+							128,
+							0,
+							0,
+							5,
+							0,
+							0
+						],
+						"hex": "",
+						"asm": null
+					},
+					"catches": null
+				}
+			},
+			{
+				"ptr": 4,
+				"deps": [
+					6,
+					0
+				],
+				"kind": "routine",
+				"data": {
+					"name": "Set!",
+					"kind": "invokable",
+					"accepts": [
+						{
+							"slot": 0,
+							"label": "value",
+							"type": "bool"
+						}
+					],
+					"returns": [],
+					"executes": {
+						"bin": [
+							10,
+							0,
+							4,
+							1,
+							0,
+							82,
+							0,
+							0,
+							1,
+							17,
+							1,
+							6,
+							12,
+							0,
+							1,
+							0
+						],
+						"hex": "",
+						"asm": null
+					},
+					"catches": null
+				}
+			},
+			{
+				"ptr": 5,
+				"deps": [
+					0
+				],
+				"kind": "routine",
+				"data": {
+					"name": "Toggle!",
+					"kind": "invokable",
+					"accepts": [],
+					"returns": [],
+					"executes": {
+						"bin": [
+							128,
+							0,
+							0,
+							98,
+							1,
+							0,
+							36,
+							0,
+							1,
+							129,
+							0,
+							0
+						],
+						"hex": "",
+						"asm": null
+					},
+					"catches": null
+				}
+			},
+			{
+				"ptr": 6,
+				"deps": [
+					0
+				],
+				"kind": "routine",
+				"data": {
+					"name": "set!",
+					"kind": "local",
+					"accepts": [
+						{
+							"slot": 0,
+							"label": "value",
+							"type": "bool"
+						}
+					],
+					"returns": [],
+					"executes": {
+						"bin": [
+							4,
+							0,
+							0,
+							129,
+							0,
+							0
+						],
+						"hex": "",
+						"asm": null
+					},
+					"catches": null
+				}
+			}
+		]
+	},
+	"Object": {
+		"ID": "0x080000819bf8907cbf259a6a4e7d6bcc4c0fce3691e889c76cb2571c50cc845dd9037c",
+		"EngineKind": "PISA",
+		"ManifestHash": "0xd7ac616b1ab528fa57420763312bff6bd85d21f0ab49873d9cb912e9b6c33d05",
+		"Sealed": false,
+		"AssetLogic": false,
+		"Interactive": false,
+		"StateMatrix": {
+			"0": 0
+		},
+		"Dependencies": {
+			"0": [],
+			"1": [
+				0
+			],
+			"2": [
+				0,
+				6
+			],
+			"3": [
+				0
+			],
+			"4": [
+				0,
+				6
+			],
+			"5": [
+				0
+			],
+			"6": [
+				0
+			]
+		},
+		"Elements": {
+			"0": {
+				"Kind": "state",
+				"Deps": null,
+				"Data": "Di8GXnZhbHVlLwMDAQ=="
+			},
+			"1": {
+				"Kind": "routine",
+				"Deps": [
+					0
+				],
+				"Data": "Do8BDjaDAZYBkAIvAABJbml0IQFkZXBsb3llcg=="
+			},
+			"2": {
+				"Kind": "routine",
+				"Deps": [
+					6,
+					0
+				],
+				"Data": "Dp8BDqYC8wKGA44EPw7gAS8GfmluaXRpYWwvAwMBU2VlZCECZGVwbG95ZXKPAQ5evgGuAo4DLwMWCgAvAxYEAQAvAxZSAAABLwMWEQEGLwMWDAABAA=="
+			},
+			"3": {
+				"Kind": "routine",
+				"Deps": [
+					0
+				],
+				"Data": "Dp8BDvYBowK2As4DLwAOLwZedmFsdWUvAwMBR2V0A2ludm9rYWJsZS8Obi8DFoAAAC8DFgUAAA=="
+			},
+			"4": {
+				"Kind": "routine",
+				"Deps": [
+					6,
+					0
+				],
+				"Data": "Dp8BDoYCwwLWAu4DPw7AAS8GXnZhbHVlLwMDAVNldCEEaW52b2thYmxljwEOXr4BrgKOAy8DFgoALwMWBAEALwMWUgAAAS8DFhEBBi8DFgwAAQA="
+			},
+			"5": {
+				"Kind": "routine",
+				"Deps": [
+					0
+				],
+				"Data": "Do8BDjajAbYBzgIvAABUb2dnbGUhBWludm9rYWJsZW8Obs4BrgIvAxaAAAAvAxZiAQAvAxYkAAEvAxaBAAA="
+			},
+			"6": {
+				"Kind": "routine",
+				"Deps": [
+					0
+				],
+				"Data": "Dp8BDoYCwwLWAq4DPw7AAS8GXnZhbHVlLwMDAXNldCEGbG9jYWwvDm4vAxYEAAAvAxaBAAA="
+			}
+		},
+		"Callsites": {
+			"Get": {
+				"Ptr": 3,
+				"Kind": "invokable"
+			},
+			"Init!": {
+				"Ptr": 1,
+				"Kind": "deployer"
+			},
+			"Seed!": {
+				"Ptr": 2,
+				"Kind": "deployer"
+			},
+			"Set!": {
+				"Ptr": 4,
+				"Kind": "invokable"
+			},
+			"Toggle!": {
+				"Ptr": 5,
+				"Kind": "invokable"
+			}
+		},
+		"Classdefs": {}
+	},
+	"CtxState": {
+		"Address": "0x819bf8907cbf259a6a4e7d6bcc4c0fce3691e889c76cb2571c50cc845dd9037c",
+		"Datastore": {},
+		"LogicState": {},
+		"Spendable": {},
+		"Approvals": {},
+		"Lockups": {}
+	}
+}

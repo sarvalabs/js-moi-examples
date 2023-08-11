@@ -1,0 +1,73 @@
+<svg class="svg" height="200" width="400" xmlns="http://www.w3.org/2000/svg">
+    <filter id="glow-effect">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/>
+    <feOffset dx="0" dy="0" result="offsetblur"/>
+    <feFlood flood-color="#FFFFFF"/>
+    <feComposite in2="offsetblur" operator="in"/>
+    <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+    </filter>
+    <filter id="stars-glow">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/>
+    <feOffset dx="0" dy="0" result="offsetblur"/>
+    <feFlood flood-color="#FFFFFF"/>
+    <feComposite in2="offsetblur" operator="in"/>
+    <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+    </filter>
+    <!-- Cloud -->
+    <symbol id="cloud" viewBox="0 0 32 32">
+        <path d="M32 20.548c0-2.565-1.771-4.716-4.156-5.296-0.101-4.022-3.389-7.252-7.433-7.252-2.369 0-4.477 1.109-5.839 2.835-0.764-0.987-1.959-1.624-3.303-1.624-2.307 0-4.176 1.871-4.176 4.179 0 0.201 0.015 0.399 0.043 0.592-0.351-0.063-0.711-0.098-1.080-0.098-3.344-0-6.054 2.712-6.054 6.058s2.71 6.058 6.054 6.058l20.508-0c3.004-0.006 5.438-2.444 5.438-5.451z" fill="white"></path>
+    </symbol>
+    <g fill="none" fill-rule="evenodd">
+    <g>
+        <circle class="explosion northWestExplosion" cx="100" cy="100" r="4" />
+        <circle class="explosion northExplosion" cx="100" cy="100" r="4" />
+        <circle class="explosion northEastExplosion" cx="100" cy="100" r="4" />
+        <circle class="explosion eastExplosion" cx="100" cy="100" r="4" />
+        <circle class="explosion southEastExplosion" cx="100" cy="100" r="4" />
+        <circle class="explosion southExplosion" cx="100" cy="100" r="4" />
+        <circle class="explosion southWestExplosion" cx="100" cy="100" r="4" />
+        <circle class="explosion westExplosion" cx="100" cy="100" r="4" />
+    </g>
+    <circle class="effect-circ" cx="100" cy="100" r="70"/>
+    <g>
+        <circle filter="url(#glow-effect)" class="sun" cx="100" cy="100" r="30" />
+        <circle class="craters" cx="90" cy="90" r="6" fill="#BDBDBD" />
+        <circle class="craters" cx="110" cy="85" r="4" fill="#BDBDBD" />
+        <circle class="craters" cx="105" cy="105" r="3" fill="#BDBDBD" />
+    </g>
+    <use class="clouds" href="#cloud" x="120" y="50" width="100" height="50"/>
+    <use class="clouds" href="#cloud" x="100" y="150" width="100" height="50"/>
+    <use class="clouds" href="#cloud" x="-10" y="110" width="100" height="50"/>
+    <g>
+        <circle class="stars" filter="url(#glow-effect)" cx="145" cy="133"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="30" cy="190"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="47" cy="199"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="58" cy="11"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="167" cy="169"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="144" cy="32"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="82" cy="167"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="40" cy="121"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="186" cy="76"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="130" cy="189"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="126" cy="173"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="12" cy="164"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="14" cy="69"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="197" cy="168"  r="2" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="10" cy="118"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="109" cy="44"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="177" cy="81"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="53" cy="97"  r="1" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="60" cy="165"  r="2" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="42" cy="51"  r="2" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="29" cy="193"  r="2" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="154" cy="33"  r="2" fill="white" />
+        <circle class="stars" filter="url(#glow-effect)" cx="97" cy="54"  r="2" fill="white" />
+    </g>
+    </g>
+</svg>

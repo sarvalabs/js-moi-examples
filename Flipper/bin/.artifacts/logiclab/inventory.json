@@ -1,0 +1,13 @@
+{
+	"Config": {
+		"BaseFuel": 10000,
+		"HexBig": true,
+		"HexBytes": true
+	},
+	"Sender": "",
+	"Receiver": "",
+	"Participants": {},
+	"LogicAccounts": {
+		"Flipper": "0x080000819bf8907cbf259a6a4e7d6bcc4c0fce3691e889c76cb2571c50cc845dd9037c"
+	}
+}
