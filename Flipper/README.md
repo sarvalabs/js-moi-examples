@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# Flipper
+Flipper is a module that provides logic for interacting with the moi protocol. This README will guide you through the process of deploying the flipper logic, running the app locally, and interacting with the logic.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation and Deployment
+1. Compile the flipper module using the coco compiler:
+    ```
+    coco compile flipper.coco --format json
+    ```
+    This will generate the `flipper.json` file within the `bin` directory.
 
-## Available Scripts
+2. Deploy the flipper logic to the moi protocol using the following JavaScript code:
+```javascript
+const provider = new VoyageProvider('babylon');
 
-In the project directory, you can run:
+const initializeWallet = async () => {
+    const derivationPath = "m/44'/6174'/0'/0/1";
+    const wallet = new Wallet(provider);
+    await wallet.fromMnemonic(MNEMONIC, derivationPath);
+    return wallet;
+}
 
-### `npm start`
+const logicDeploy = async() => {
+    const signer = await initializeWallet(provider);
+    const factory = new LogicFactory(flipper, signer);
+    const args = [true]
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    const response = await factory.deploy("Seed!", args).send({
+                sender: signer.getAddress(),
+                fuelPrice: 1,
+                fuelLimit: 1000,
+            });
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    console.log("ix_hash: ", response.hash)
 
-### `npm test`
+    const result = await response.result();
+    console.log("ix_result: ", result)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    const receipt = await response.wait();
+    console.log("ix_receipt: ", receipt)
+}
+```
+This code will deploy the manifest (flipper.json). This logic is currently deployed, and the logic ID is: `0x0800004904ab2d8b0fb3561dc0c35592b8012e651c075ed9b878aad7531bbd8d194a9f`.
 
-### `npm run build`
+## Running the App Locally
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Create a folder named `env` in the global directory.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Inside the `env` folder, create a file named `dev.env` containing your seed phrase.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. To run the app locally, follow these steps:
+- Navigate to the `src` directory  
+     ```
+     cd src
+     ```
+- Install dependencies:
+     ```
+     npm install
+     ```
+- Start the app: 
+     ```
+     npm start
+     ```
 
-### `npm run eject`
+4. To log in to the application, use the seed phrase you have created while creating your moi id. If you don't have a moi id, you can create one at [Voyage](https://voyage.moi.technology/).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Interacting with logic via voyage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can invoke logic functions directly using the moi protocol's [RPC interface](https://voyage.moi.technology/rpc/). To do this, you need to pass the logic ID.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To interact with the logic, you will need to claim kmoi tokens from the [faucet](https://voyage.moi.technology/faucet/)
