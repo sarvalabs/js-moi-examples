@@ -20,7 +20,7 @@ export const logicGet = async() => {
     return value
 }
 
-export const logicSet = async() => {
+export const logicSet = async(userValue) => {
     let signer = await initializeWallet(provider);
     const logicID = "0x0800004904ab2d8b0fb3561dc0c35592b8012e651c075ed9b878aad7531bbd8d194a9f"
     const driver = await getLogicDriver(logicID, signer)
@@ -28,9 +28,7 @@ export const logicSet = async() => {
     const value = await driver.persistentState.get("value")
     console.log("Value: ", value)
 
-    console.log(signer.getAddress())
-
-    const args = [false]
+    const args = [userValue]
     
     const response = await driver.routines.Set(args).send({
                 sender: signer.getAddress(),
@@ -46,13 +44,10 @@ export const logicSet = async() => {
 
         const result = await response.result();
         console.log("ix_result: ", result)
+        return result
         
     } catch (error) {
         console.log(error)
-        console.log("Updated Value: ", value)
+        return null
     }
 }
-
-/* logicDeploy() */
-/* logicGet() */
-/* logicSet() */

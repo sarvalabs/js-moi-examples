@@ -11,6 +11,8 @@ function App() {
   const [ready, setReady] = useState(false)
   const [mnemonic, setMnemonic] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [error, setError] = useState("");
+  const [click, setClick] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -20,20 +22,35 @@ function App() {
       {
         setMnemonic(mnemonic)
         setIsModalOpen(false);
+        setError("")
+        setClick(true)
       }
+    else{
+      setError("Incorrect mnemonic")
+    }
   };
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setIsModalOpen(false)
+    setError("")
   };
 
   const handleCheckboxChange = async() => {
-    await logicSet(!isChecked)
-    setIsChecked(!isChecked);
-    document.body.style.background = !isChecked ? "#0288D1": "#090D23"
+    setClick(false)
+    const returnVal = await logicSet(!isChecked)
+    if(returnVal !== null){
+      setIsChecked(!isChecked);
+      document.body.style.background = !isChecked ? "#0288D1": "#090D23"
+      setClick(true)
+    } else {
+      console.log("Interaction failed")
+      alert("Interaction failed! Try again")
+      setClick(false)
+    }
   };
 
   const handleLogout = () => {
     setMnemonic("")
+    setError("")
   }
 
   useEffect(() => {
@@ -49,25 +66,25 @@ function App() {
 
   return (
       (!ready ? (
-      <div className='wrapper'>
+      <div className='loader'>
         <Spin size="large" />
       </div> 
       ):(
       <div className='container'>
         <div className="modal">
           <Button onClick={!mnemonic ? showModal : handleLogout}>{!mnemonic ? "Login" : "Logout"}</Button>
-          <MnemonicModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel}/>
+          <MnemonicModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} error={error}/>
         </div>
-        <div className={`wrapper ${!mnemonic ? 'noClick' : ''}`}>
+        <div className={`wrapper ${!mnemonic || !click ? 'noClick' : ''}`}>
           <input
             type="checkbox"
             id="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
-            disabled={!mnemonic ? true : false}
+            disabled={!click ? true : false}
           />
-          <label htmlFor="checkbox">
-            <Main />
+          <label htmlFor="checkbox" className={`${!mnemonic || !click ? 'noClick' : ''}`}>
+            <Main className={`svg ${!mnemonic || !click ? 'noClick' : ''}`}/>
           </label>
         </div>
       </div>
