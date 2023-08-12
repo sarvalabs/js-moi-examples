@@ -1,0 +1,192 @@
+#root {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+}
+
+body {
+  background-color: #090D23;
+  transition: background-color .8s ease;
+  height: 100%;
+}
+
+.container{
+  display: grid;
+  height: 100%;
+}
+
+.modal{
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px 30px 0px 0px;
+}
+
+.loader{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-left: 100px;
+}
+
+.wrapper.noClick{
+  cursor: not-allowed;
+}
+
+#checkbox {
+  display: none;
+}
+
+.noClick{
+  cursor: not-allowed;
+}
+
+.svg.noClick {
+  cursor: not-allowed;
+}
+
+.svg{
+  cursor: pointer;
+}
+
+.effect-circ {
+  transform-origin: 100px 100px;
+  transform: scale(0);
+  fill: #FFB300;
+  opacity: 0;
+}
+
+.sun {
+  transform-origin: 100px 100px;
+  transform: scale(1);
+  fill: #E0E0E0;
+  transition: fill .8s ease;
+}
+
+.craters {
+  transform-origin: 100px 100px;
+  transform: scale(1);
+  opacity: 1;
+  transition: transform .8s ease;
+  transition: opacity .8s ease;
+}
+
+.clouds {
+  transform: translate(200px, 0);
+  opacity: 0;
+  transition: all .4s ease;
+}
+.stars {
+  transition: opacity 2s ease;
+  opacity: 1;
+}
+
+.explosion {
+  transform-origin: 100px 100px;
+  fill: #FF9800;
+  opacity: 0;
+  transform: translate(0, 0) scale(0);
+}
+
+/* When checked */
+#checkbox:checked + label > .svg {
+  & .effect-circ {
+    animation: circleAnimation .2s linear;
+  }
+  & .sun {
+    fill: #FFC107;
+    animation: iconAnimation .2s linear;
+  }
+  & .craters {
+    transform: scale(0);
+    opacity: 0;
+  }
+  & .clouds {
+    transform: translate(0, 0);
+    opacity: 1;
+    transition: all .4s cubic-bezier(0, 1.51, 0.72, 0.96);
+  }
+  & .stars {
+    transition: opacity .4s ease;
+    opacity: 0;
+  }
+  & .northWestExplosion {
+    animation: northWestExplosionAnimation .4s linear;
+  }
+  & .northExplosion {
+    animation: northExplosionAnimation .4s linear;
+  }
+  & .northEastExplosion {
+    animation: northEastExplosionAnimation .4s linear;
+  }
+  & .eastExplosion {
+    animation: eastExplosionAnimation .4s linear;
+  }
+  & .southEastExplosion {
+    animation: southEastExplosionAnimation .4s linear;
+  }
+  & .southExplosion {
+    animation: southExplosionAnimation .4s linear;
+  }
+  & .southWestExplosion {
+    animation: southWestExplosionAnimation .4s linear;
+  }
+  & .westExplosion {
+    animation: westExplosionAnimation .4s linear;
+  }
+}
+
+/* KEYFRAMES */
+
+@keyframes circleAnimation {
+  50% { transform:scale(0.4); opacity: 0.2 }
+  70% { transform:scale(0.8); opacity: 0.5; fill: transparent; stroke: #FFB300; stroke-width: 4px; }
+  100% { transform: scale(1); opacity: 0; fill: transparent; }
+}
+
+@keyframes iconAnimation {
+  50% { transform:scale(0.3);}
+  70% { transform:scale(0.8);}
+  100% { transform: scale(1);}
+}
+
+// Explosions
+@keyframes northWestExplosionAnimation {
+  70% { transform: translate(-24px, -24px) scale(1); opacity: 1; }
+  100% { transform: translate(-30px, -30px) scale(1); opacity: 0; }
+}
+@keyframes northExplosionAnimation {
+  70% { transform: translate(0px, -34px) scale(1); opacity: 1; }
+  100% { transform: translate(0px, -42px) scale(1); opacity: 0; }
+}
+@keyframes northEastExplosionAnimation {
+  70% { transform: translate(24px, -24px) scale(1); opacity: 1; }
+  100% { transform: translate(30px, -30px) scale(1); opacity: 0; }
+}
+@keyframes eastExplosionAnimation {
+  70% { transform: translate(34px, 0px) scale(1); opacity: 1; }
+  100% { transform: translate(42px, 0px) scale(1); opacity: 0; }
+}
+@keyframes southEastExplosionAnimation {
+  70% { transform: translate(24px, 24px) scale(1); opacity: 1; }
+  100% { transform: translate(30px, 30px) scale(1); opacity: 0; }
+}
+@keyframes southExplosionAnimation {
+  70% { transform: translate(0, 34px) scale(1); opacity: 1; }
+  100% { transform: translate(0, 42px) scale(1); opacity: 0; }
+}
+@keyframes southWestExplosionAnimation {
+  70% { transform: translate(-24px, 24px) scale(1); opacity: 1; }
+  100% { transform: translate(-30px, 30px) scale(1); opacity: 0; }
+}
+@keyframes westExplosionAnimation {
+  70% { transform: translate(-34px, 0px) scale(1); opacity: 1; }
+  100% { transform: translate(-42px, 0px) scale(1); opacity: 0; }
+}
