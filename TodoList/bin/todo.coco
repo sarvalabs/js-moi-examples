@@ -1,0 +1,27 @@
+coco TodoList
+
+state persistent:
+    todos []Todo
+
+class Todo:
+    field name String
+    field completed Bool
+
+endpoint deployer Init!():
+    pass
+
+endpoint invokable Add!(name String):
+    var todo = Todo{name: name, completed: false}
+
+    mutate todos <- TodoList.State.todos:
+        todos = append(todos, todo)
+
+endpoint invokable MarkTodoCompleted!(id U64):
+    mutate todos <- TodoList.State.todos:
+            todos[id].completed = true
+        
+
+            
+
+
+
