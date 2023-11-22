@@ -1,0 +1,180 @@
+{
+    "syntax": "0.1.0",
+    "engine": {
+      "kind": "PISA",
+      "flags": []
+    },
+    "elements": [
+      {
+        "ptr": 0,
+        "deps": [
+          1
+        ],
+        "kind": "typedef",
+        "data": "[]Todo"
+      },
+      {
+        "ptr": 1,
+        "kind": "class",
+        "data": {
+          "name": "Todo",
+          "fields": [
+            {
+              "slot": 0,
+              "label": "name",
+              "type": "string"
+            },
+            {
+              "slot": 1,
+              "label": "completed",
+              "type": "bool"
+            }
+          ],
+          "methods": []
+        }
+      },
+      {
+        "ptr": 2,
+        "deps": [
+          1
+        ],
+        "kind": "state",
+        "data": {
+          "kind": "persistent",
+          "fields": [
+            {
+              "slot": 0,
+              "label": "todos",
+              "type": "[]Todo"
+            }
+          ]
+        }
+      },
+      {
+        "ptr": 3,
+        "deps": [
+          2
+        ],
+        "kind": "routine",
+        "data": {
+          "name": "Init!",
+          "kind": "deployer",
+          "accepts": [],
+          "returns": [],
+          "executes": {
+            "bin": []
+          }
+        }
+      },
+      {
+        "ptr": 4,
+        "deps": [
+          1,
+          2
+        ],
+        "kind": "routine",
+        "data": {
+          "name": "Add!",
+          "kind": "invokable",
+          "accepts": [
+            {
+              "slot": 0,
+              "label": "name",
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "executes": {
+            "bin": [
+              17,
+              0,
+              1,
+              40,
+              0,
+              0,
+              4,
+              1,
+              0,
+              82,
+              0,
+              0,
+              1,
+              41,
+              1,
+              1,
+              82,
+              0,
+              1,
+              1,
+              128,
+              2,
+              0,
+              87,
+              2,
+              0,
+              36,
+              1,
+              2,
+              129,
+              1,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "ptr": 5,
+        "deps": [
+          2
+        ],
+        "kind": "routine",
+        "data": {
+          "name": "MarkTodoCompleted!",
+          "kind": "invokable",
+          "accepts": [
+            {
+              "slot": 0,
+              "label": "id",
+              "type": "u64"
+            }
+          ],
+          "returns": [],
+          "executes": {
+            "bin": [
+              128,
+              0,
+              0,
+              4,
+              1,
+              0,
+              83,
+              2,
+              0,
+              1,
+              81,
+              2,
+              2,
+              1,
+              41,
+              2,
+              1,
+              98,
+              2,
+              2,
+              83,
+              1,
+              0,
+              1,
+              82,
+              1,
+              1,
+              2,
+              129,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    ]
+  }
