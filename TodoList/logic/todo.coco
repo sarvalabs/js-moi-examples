@@ -1,0 +1,50 @@
+coco TodoList
+
+// The persistant state is used to define stateful values
+// managed internally by the logic
+// State variables can be accessed by using their variable
+// names as endpoints
+state persistent:
+    todos []Todo
+    owner Address
+
+// The class Todo is a structure for defining a Todo,
+// where it can possess multiple fields and methods
+class Todo:
+    field name String
+    field completed Bool
+
+// InitOwner!() deployer is a constructor that assigns a 
+// value to the state variable owner
+endpoint deployer Init!():
+    mutate Address(Sender) -> TodoList.State.owner
+         
+
+// Function to check if the caller is the owner of the Logic
+func onlyOwner():
+    observe owner <- TodoList.State.owner:
+        if(Address(Sender) != owner):
+            throw "Not an Owner"
+
+// Add!() is an invokable that adds the given Todo to
+// the list of  Todo's
+endpoint invokable Add!(name String):
+    onlyOwner()
+
+    var todo = Todo{name: name, completed: false}
+
+    mutate todos <- TodoList.State.todos:
+        todos = append(todos, todo)
+
+// MarkCompleted!() is an invokable that marks the given
+// todo as completed
+endpoint invokable MarkTodoCompleted!(id U64):
+    onlyOwner()
+
+    mutate todos <- TodoList.State.todos:
+            todos[id].completed = true
+
+// You might have noticed
+// We used '!' after the endpoint name
+// That is to indicate that this 
+// endpoint mutates the logic's state.
