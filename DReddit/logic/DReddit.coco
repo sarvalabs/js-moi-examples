@@ -1,0 +1,86 @@
+coco DReddit
+
+//////////////////////
+////// Logic State
+////////////////////
+state persistent:
+    // To Store Reddit Posts
+    posts []Post
+
+    // UserAddress => PostId => 0 for not voted, 1 for upvoted, 2 for downvote
+    votes Map[Address]Map[U64]U64
+
+class Post:
+    field id U64
+    field creator Address
+    field title String
+    field content String
+    field imageUri String
+    field upvotes U64
+    field downvotes U64
+
+//////////////////////
+////// Deployer/Constructor
+////////////////////
+endpoint deployer Init!():
+    pass
+
+//////////////////////
+////// Write Endpoints
+////////////////////
+endpoint invokable CreatePost!(title, content, imageUri String)->(post Post):
+    var creator Address = Address(Sender)
+
+    mutate posts <- DReddit.State.posts:
+        var newPost = Post{id: len(posts), creator: creator, title: title, content: content, imageUri: imageUri, upvotes: 0, downvotes: 0}
+        posts = append(posts, newPost)
+        yield post newPost
+
+endpoint invokable Upvote!(id U64):
+    var user Address = Address(Sender)
+    var usersVote U64
+
+    observe votes <- DReddit.State.votes:
+        usersVote = votes[user][id]
+
+    if(usersVote == 1):
+        throw "Already Upvoted"
+    
+    // Mutating user's vote for the given post
+    mutate votes <- DReddit.State.votes:
+        votes[user][id] = 1
+
+    // Updating Post's total count of downvotes and upvotes
+    mutate allPosts <- DReddit.State.posts:
+            allPosts[id].upvotes += 1
+            if(usersVote == 2):
+                allPosts[id].downvotes -= 1
+
+endpoint invokable Downvote!(id U64):
+    var user Address = Address(Sender)
+    var usersVote U64
+
+    observe votes <- DReddit.State.votes:
+        usersVote = votes[user][id]
+
+    if(usersVote == 2):
+        throw "Already Downvoted"
+    
+    // Mutating user's vote for the given post
+    mutate votes <- DReddit.State.votes:
+        votes[user][id] = 2
+
+    // Updating Post's total count of downvotes and upvotes
+    mutate allPosts <- DReddit.State.posts:
+            allPosts[id].downvotes += 1  
+            if(usersVote == 1):
+                allPosts[id].upvotes -= 1
+
+//////////////////////
+////// Read Endpoints
+////////////////////
+endpoint invokable getUsersVoteFor(id U64) -> (vote U64):
+    var user Address = Address(Sender)
+
+    observe votes <- DReddit.State.votes:
+        vote = votes[user][id]
