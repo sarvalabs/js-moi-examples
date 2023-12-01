@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { VoyageProvider, Wallet, getLogicDriver } from 'js-moi-sdk';
+import { VoyageProvider, Wallet, getLogicDriver } from "js-moi-sdk";
 import { info, success } from "./utils/toastWrapper";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
 
 // ------- Update with your credentials ------------------ //
-const logicId = "Logic Id Here"
-const mnemonic = "Your Mnemonic Here"
+const logicId = "Logic Id Here";
+const mnemonic = "Your Mnemonic Here";
 
-const logicDriver = await gettingLogicDriver(
-  logicId,
-  mnemonic,
-  "m/44'/6174'/7020'/0/0"
-)
+const logicDriver = await gettingLogicDriver(logicId, mnemonic, "m/44'/6174'/7020'/0/0");
 
 async function gettingLogicDriver(logicId, mnemonic, accountPath) {
-  const provider = new VoyageProvider("babylon")
-  const wallet = new Wallet(provider)
-  await wallet.fromMnemonic(mnemonic, accountPath)
-  return await getLogicDriver(logicId, wallet)
+  const provider = new VoyageProvider("babylon");
+  const wallet = new Wallet(provider);
+  await wallet.fromMnemonic(mnemonic, accountPath);
+  return await getLogicDriver(logicId, wallet);
 }
 
 function App() {
@@ -40,11 +36,11 @@ function App() {
 
   const getTodos = async () => {
     try {
-      const tTodos = await logicDriver.persistentState.get("todos")
-      setTodos(tTodos)
+      const tTodos = await logicDriver.persistentState.get("todos");
+      setTodos(tTodos);
       setLoading(false);
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.log(error);
     }
   };
@@ -52,21 +48,22 @@ function App() {
   const add = async (e) => {
     e.preventDefault();
     try {
-      setAdding(true)
+      setAdding(true);
       info("Adding Todo ...");
-      
+
       const ix = await logicDriver.routines.Add([todoName]).send({
         fuelPrice: 1,
         fuelLimit: 1000,
       });
+      info("Adding Todo");
 
-      // Waiting for tesseract to be mined
-      await ix.wait()
-      
-      await getTodos()
+      await ix.wait();
+
+      await getTodos();
       success("Successfully Added");
-      setTodoName("")
-      setAdding(false)
+
+      setTodoName("");
+      setAdding(false);
     } catch (error) {
       console.log(error);
     }
@@ -74,18 +71,20 @@ function App() {
 
   const markCompleted = async (id) => {
     try {
-      setMarking(id)
+      setMarking(id);
       const ix = await logicDriver.routines.MarkTodoCompleted([id]).send({
         fuelPrice: 1,
         fuelLimit: 1000,
       });
-      // Waiting for tesseract to be mined
+      info("marking as completed");
+
       await ix.wait();
-      
+      info("Successfully marked as completed");
+
       const tTodos = [...todos];
       tTodos[id].completed = true;
       setTodos(tTodos);
-      setMarking(false)
+      setMarking(false);
     } catch (error) {
       console.log(error);
     }
@@ -108,33 +107,39 @@ function App() {
               placeholder="e.g. Attend Moi Event"
             />
             <button onClick={add} type="submit" class="submit-btn">
-            {adding ? <Loader color={"#000"} loading={adding} /> :"Add Todo"}
+              {adding ? <Loader color={"#000"} loading={adding} /> : "Add Todo"}
             </button>
           </div>
         </form>
-        {!loading ? <div class="todo-container show-container">
-          {todos.map((todo, index) => {
-            return (
-              <div class="todo-list">
-                {todo.name}
-                {todo.completed ? (
-                  <img className="icon" src="/images/check.svg" />
-                ) : (
-                  <span
-                    onClick={() => markCompleted(index)}
-                    className="underline text-red pointer"
-                  >
-                    {marking === index? <Loader color={"#000"} loading={marking === 0 ? true:marking} /> :"Mark Completed!"}
-                  </span>
-                )}
-              </div>
-            );
-          })}
-        </div> 
-        : 
-        <div style={{marginTop:"20px"}}>
-          <Loader color={"#000"} loading={loading} />  
-        </div>}
+        {!loading ? (
+          <div class="todo-container show-container">
+            {todos.map((todo, index) => {
+              return (
+                <div class="todo-list">
+                  {todo.name}
+                  {todo.completed ? (
+                    <img className="icon" src="/images/check.svg" />
+                  ) : (
+                    <span
+                      onClick={() => markCompleted(index)}
+                      className="underline text-red pointer"
+                    >
+                      {marking === index ? (
+                        <Loader color={"#000"} loading={marking === 0 ? true : marking} />
+                      ) : (
+                        "Mark Completed!"
+                      )}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div style={{ marginTop: "20px" }}>
+            <Loader color={"#000"} loading={loading} />
+          </div>
+        )}
       </section>
     </>
   );

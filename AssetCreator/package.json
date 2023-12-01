@@ -1,15 +1,17 @@
 {
-  "name": "todo-list",
+  "name": "asset-creator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^5.11.5",
     "js-moi-sdk": "^0.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.20.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
     "web-vitals": "^2.1.4"
