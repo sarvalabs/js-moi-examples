@@ -1,35 +1,42 @@
 const { VoyageProvider, Wallet, LogicFactory } = require("js-moi-sdk");
 const manifest = require("./DReddit.json");
 
-// ------- Update with your credentials ------------------ //
-const MNEMONIC = "Paste Your Mnemonic Here";
+// ------- Update with your Mnemonic ------------------ //
+const MNEMONIC = "area repeat sudden beach item gloom dice hub grant number mouse custom";
 
+// JsonRpcProvider to interact with MOI Network (Here we are using public RPC from Voyage)
+const provider = new VoyageProvider("babylon");
+
+// Function to instantiate a wallet with provider and sender account
 const constructWallet = async () => {
-  const provider = new VoyageProvider("babylon");
   const wallet = new Wallet(provider);
-  await wallet.fromMnemonic(MNEMONIC, "m/44'/6174'/7020'/0/0");
+
+  // The path derives your account from the mnemonic
+  const accountPath = "m/44'/6174'/7020'/0/0";
+
+  await wallet.fromMnemonic(MNEMONIC, accountPath);
   return wallet;
 };
 
 const deployLogic = async () => {
+  // getting wallet To sign and send the ix to the network
   const wallet = await constructWallet();
 
-  console.log("------ Deploying Logic ----------");
+  // LogicFactory creates a new instance of Logic with it's manifest and sender's wallet
   const logicFactory = new LogicFactory(manifest, wallet);
-  const ix = await logicFactory.deploy("Init!", []).send({
+
+  // Submitting the Interaction to the network to deploy the logic
+  const ixResponse = await logicFactory.deploy("Init!", []).send({
     fuelPrice: 1,
     fuelLimit: 2000,
   });
+  console.log("------ Deploying Logic ----------");
+  console.log(ixResponse);
 
-  const [ixReceipt, ixResult] = await Promise.all([ix.wait(), ix.result()]);
-
+  // Polling the network for the Interaction Receipt and print it
+  const ixReceipt = await ixResponse.wait();
   console.log("------ Deployed Logic Successfully!! ----------");
-  console.log("------ IX Receipt ----------");
   console.log(ixReceipt);
-  console.log("------ IX Result ----------");
-  console.log(ixResult);
-  console.log("------ Logic Id ----------");
-  console.log(ixResult.logic_id);
 };
 
 deployLogic();

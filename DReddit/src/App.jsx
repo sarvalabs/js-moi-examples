@@ -8,7 +8,7 @@ import MnemonicModal from "./components/MnemonicModal";
 import { validateMnemonic } from "js-moi-sdk";
 
 // ------- Update with your Logic Id ------------------ //
-const logicId = "Paste the LogicId here";
+const logicId = "0x080000643e328b31ccaab66c37bcb9869273b343d5f2aca687bf47f533437d3069884d";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -55,7 +55,7 @@ function App() {
     try {
       setLoadingPost(true);
       let tPosts = await logicDriver.persistentState.get("posts");
-      tPosts = await configUsersVote(tPosts);
+      tPosts = await getUserVote(tPosts);
       tPosts.reverse();
       setPosts(tPosts);
       setLoadingPost(false);
@@ -65,9 +65,9 @@ function App() {
     }
   };
 
-  const configUsersVote = async (posts) => {
+  const getUserVote = async (posts) => {
     for (let i = 0; i < posts.length; i++) {
-      const readIx = await logicDriver.routines.getUsersVoteFor([posts[i].id]).call({
+      const readIx = await logicDriver.routines.getUserVote([posts[i].id]).call({
         fuelPrice: 1,
         fuelLimit: 1000,
       });

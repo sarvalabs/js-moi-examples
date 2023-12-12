@@ -1,46 +1,71 @@
+// Logic Name
 coco DReddit
 
+////////////////////////
+////// Logic State 
 //////////////////////
-////// Logic State
-////////////////////
 state persistent:
-    // To Store Reddit Posts
-    posts []Post
+    // Mapping of PostId => Post
+    posts Map[U64]Post
 
-    // UserAddress => PostId => 0 for not voted, 1 for upvoted, 2 for downvote
+    // Mapping of Address => U64 => U64
+    // UserAddress(Address) => PostId(U64) => 0, 1, 2(U64)
+    // 0 for not voted, 1 for upvoted, 2 for downvoted
     votes Map[Address]Map[U64]U64
 
+////////////////////////
+////// Classes
+//////////////////////
+
+// The class Todo is a structure for defining a Todo,
+// where it can possess multiple fields and methods
 class Post:
-    field id U64
     field creator Address
     field content String
     field upvotes U64
     field downvotes U64
 
+////////////////////////
+////// Deployer Endpoints
 //////////////////////
-////// Deployer/Constructor
-////////////////////
+
+// Init!() deployer is a constructor that leaves
+// the persistent state untouched at the deploy time.
 endpoint deployer Init!():
     pass
 
-//////////////////////
+////////////////////////
 ////// Write Endpoints
-////////////////////
-endpoint invokable CreatePost!(content String)->(post Post):
+//////////////////////
+
+// "!" after endpoint name means endpoint mutates
+// the logic state 
+
+// CreatePost!() is an invokable that creates & adds a new post
+// and also returns the new post
+endpoint invokable CreatePost!(content String) -> (post Post):
     var creator Address = Address(Sender)
 
+    // "<-" is used to read and then mutate the state
+    // (Here the final value of posts in the context 
+    // block will be assigned to DReddit.State.posts)
     mutate posts <- DReddit.State.posts:
-        var newPost = Post{id: len(posts), creator: creator, content: content, upvotes: 0, downvotes: 0}
-        posts = append(posts, newPost)
-        yield post newPost
+        var newPost = Post{creator: creator, content: content, upvotes: 0, downvotes: 0}
+        posts[len(posts)] = newPost
+        yield post newPost  // To return new Post
 
+// Upvote!() is an invokable to upvote
+// the post with given id
 endpoint invokable Upvote!(id U64):
     var user Address = Address(Sender)
     var usersVote U64
 
+    // observe is used to read from the state
     observe votes <- DReddit.State.votes:
         usersVote = votes[user][id]
 
+    // throw is used to throw an error 
+    // statement reverting all the state changes
     if(usersVote == 1):
         throw "Already Upvoted"
     
@@ -50,10 +75,12 @@ endpoint invokable Upvote!(id U64):
 
     // Updating Post's total count of downvotes and upvotes
     mutate allPosts <- DReddit.State.posts:
-            allPosts[id].upvotes += 1
-            if(usersVote == 2):
-                allPosts[id].downvotes -= 1
+        allPosts[id].upvotes += 1
+        if(usersVote == 2):
+            allPosts[id].downvotes -= 1
 
+// Downvote!() is an invokable to downvote
+// the post with given id
 endpoint invokable Downvote!(id U64):
     var user Address = Address(Sender)
     var usersVote U64
@@ -70,15 +97,26 @@ endpoint invokable Downvote!(id U64):
 
     // Updating Post's total count of downvotes and upvotes
     mutate allPosts <- DReddit.State.posts:
-            allPosts[id].downvotes += 1  
-            if(usersVote == 1):
-                allPosts[id].upvotes -= 1
+        allPosts[id].downvotes += 1  
+        if(usersVote == 1):
+            allPosts[id].upvotes -= 1
 
 //////////////////////
 ////// Read Endpoints
 ////////////////////
-endpoint invokable getUsersVoteFor(id U64) -> (vote U64):
-    var user Address = Address(Sender)
 
+endpoint invokable getPost(id U64) -> (post Post):
+    observe posts <- DReddit.State.posts:
+        yield post posts[id]
+
+endpoint invokable getPostsCount(id U64) -> (count U64):
+    observe posts <- DReddit.State.posts:
+        yield count len(posts)
+
+// getUsersVote() is an invokable endpoint to retrieve
+// the vote of the current user for a specific post (id)
+endpoint invokable getUserVote(id U64) -> (vote U64):
+    var user Address = Address(Sender)
+    
     observe votes <- DReddit.State.votes:
         vote = votes[user][id]
