@@ -18,7 +18,6 @@ class Todo:
 // value to the state variable owner
 endpoint deployer Init!():
     mutate Address(Sender) -> TodoList.State.owner
-         
 
 // Function to check if the caller is the owner of the Logic
 func onlyOwner():

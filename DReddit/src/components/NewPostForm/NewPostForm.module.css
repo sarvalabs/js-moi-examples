@@ -1,0 +1,175 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+  max-width: 768px;
+  width: 768px;
+  position: fixed;
+  /* top: 20vh; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; */
+  background-color: white;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 30;
+  animation: slide-down 300ms ease-out forwards;
+  padding: 25px;
+}
+
+.popupHeader {
+  height: 40px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.formHeading {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.closeBtn {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0072e1;
+  font-size: 22px;
+  border-radius: 50px;
+  background-color: rgb(234, 235, 255);
+}
+
+.formEl {
+  /* width: 576px; */
+  height: auto;
+}
+
+.inputEl {
+  display: flex;
+  flex-direction: column;
+}
+.inputEl:not(:last-of-type) {
+  margin-bottom: 40px;
+}
+
+.label {
+  margin-bottom: 15px;
+}
+
+.input {
+  height: 40px;
+  padding-left: 15px;
+  background-color: rgb(234, 235, 255);
+  border: none;
+  border-radius: 5px;
+}
+
+.textarea {
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(234, 235, 255);
+  padding: 15px;
+}
+
+.submitBtn {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  column-gap: 20px;
+}
+
+.btnEl {
+  flex: 1;
+}
+
+.btn {
+  height: 100%;
+  width: 100%;
+  background-color: #0072e1;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.browseEl {
+  height: 100%;
+  width: 40px;
+}
+
+.browseTxt {
+  /* border: 1px solid red; */
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0072e1;
+  background-color: rgb(234, 235, 255);
+}
+
+.fileInput {
+  display: none;
+}
+
+@media (max-width: 840px) {
+  .modal {
+    width: 576px;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal {
+    width: 476px;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal {
+    width: 425px;
+  }
+}
+
+@media (max-width: 475px) {
+  .modal {
+    width: 375px;
+  }
+}
+
+@media (max-width: 425px) {
+  .modal {
+    width: 325px;
+  }
+}
+
+/* @keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} */
