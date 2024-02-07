@@ -1,0 +1,234 @@
+{
+  "syntax": "0.1.0",
+  "engine": {
+    "kind": "PISA",
+    "flags": []
+  },
+  "elements": [
+    {
+      "ptr": 0,
+      "kind": "constant",
+      "data": {
+        "type": "string",
+        "value": "0x064e6f7420616e204f776e6572"
+      }
+    },
+    {
+      "ptr": 1,
+      "deps": [
+        2
+      ],
+      "kind": "typedef",
+      "data": "[]Todo"
+    },
+    {
+      "ptr": 2,
+      "kind": "class",
+      "data": {
+        "name": "Todo",
+        "fields": [
+          {
+            "slot": 0,
+            "label": "id",
+            "type": "u64"
+          },
+          {
+            "slot": 1,
+            "label": "name",
+            "type": "string"
+          },
+          {
+            "slot": 2,
+            "label": "completed",
+            "type": "bool"
+          }
+        ],
+        "methods": []
+      }
+    },
+    {
+      "ptr": 3,
+      "deps": [
+        2
+      ],
+      "kind": "state",
+      "data": {
+        "kind": "persistent",
+        "fields": [
+          {
+            "slot": 0,
+            "label": "todos",
+            "type": "[]Todo"
+          },
+          {
+            "slot": 1,
+            "label": "owner",
+            "type": "address"
+          }
+        ]
+      }
+    },
+    {
+      "ptr": 4,
+      "deps": [
+        3
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "InitOwner!",
+        "kind": "deployer",
+        "accepts": [],
+        "returns": [],
+        "executes": {
+          "asm": [
+            "SENDER $0",
+            "ADDR $0 $0",
+            "PSAVE $0 &1"
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 5,
+      "deps": [
+        0,
+        3
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "onlyOwner",
+        "kind": "local",
+        "accepts": [],
+        "returns": [],
+        "executes": {
+          "asm": [
+            "PLOAD $0 &1",
+            "SENDER $1",
+            "ADDR $1 $1",
+            "EQ $0 $1 $0",
+            "NOT $0 $0",
+            "NOT $0 $0",
+            "LDPTR1 $1 0xb",
+            "JUMPI $1 $0",
+            "LDPTR1 $0 0x0",
+            "CONST $0 $0",
+            "THROW $0",
+            "DEST"
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 6,
+      "deps": [
+        2,
+        5,
+        3
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "AddTodo!",
+        "kind": "invokable",
+        "accepts": [
+          {
+            "slot": 0,
+            "label": "name",
+            "type": "string"
+          }
+        ],
+        "returns": [
+          {
+            "slot": 0,
+            "label": "addedTodo",
+            "type": "Todo"
+          }
+        ],
+        "executes": {
+          "asm": [
+            "CARGS $0",
+            "LDPTR1 $1 0x5",
+            "CALLR $0 $1 $0",
+            "PLOAD $0 &0",
+            "LDPTR1 $1 0x2",
+            "MAKE $1 $1",
+            "SIZEOF $2 $0",
+            "SETFLD $1 &0 $2",
+            "OBTAIN $2 &0",
+            "SETFLD $1 &1 $2",
+            "PMAKE $2 &1",
+            "SETFLD $1 &2 $2",
+            "COPY $2 $0",
+            "APPEND $2 $1",
+            "COPY $0 $2",
+            "YIELD $1 &0",
+            "PSAVE $0 &0"
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 7,
+      "deps": [
+        5,
+        3
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "MarkTodoCompleted!",
+        "kind": "invokable",
+        "accepts": [
+          {
+            "slot": 0,
+            "label": "id",
+            "type": "u64"
+          }
+        ],
+        "returns": [],
+        "executes": {
+          "asm": [
+            "CARGS $0",
+            "LDPTR1 $1 0x5",
+            "CALLR $0 $1 $0",
+            "PLOAD $0 &0",
+            "OBTAIN $1 &0",
+            "GETIDX $2 $0 $1",
+            "PMAKE $4 &1",
+            "NOT $3 $4",
+            "SETFLD $2 &2 $3",
+            "SETIDX $0 $1 $2",
+            "PSAVE $0 &0"
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 8,
+      "deps": [
+        1,
+        2,
+        3
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "GetTodos",
+        "kind": "invokable",
+        "accepts": [],
+        "returns": [
+          {
+            "slot": 0,
+            "label": "todos",
+            "type": "[]Todo"
+          }
+        ],
+        "executes": {
+          "asm": [
+            "LDPTR1 $0 0x1",
+            "MAKE $0 $0",
+            "PLOAD $0 &0",
+            "YIELD $0 &0"
+          ]
+        }
+      }
+    }
+  ]
+}

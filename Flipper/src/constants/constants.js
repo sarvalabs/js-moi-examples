@@ -1,1 +1,0 @@
-export const MNEMONIC= process.env.REACT_APP_MNEMONIC ?? ""

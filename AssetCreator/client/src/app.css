@@ -1,0 +1,198 @@
+@font-face {
+  font-family: "Satoshi-Medium";
+  src: url("../public/fonts/Satoshi-Medium.woff2") format("woff2"),
+    url("../public/fonts/Satoshi-Medium.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi-Black";
+  src: url("../public/fonts/Satoshi-Black.woff2") format("woff2"),
+    url("../public/fonts/Satoshi-Black.woff") format("woff");
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+:root {
+  --color-primary: #e7b3b3;
+  --color-dark-grey: #374151;
+
+  --font-Satoshi-Black: "Satoshi-Black", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-satoshi-regular: "Satoshi-Medium", sans-serif;
+
+  --bs-primary: #0072e1;
+  /*  (black with 75% opacity for lightbox background) */
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+}
+
+select {
+  width: 100%;
+  color: var(--color-dark-grey);
+}
+
+body {
+  margin: 0;
+  color: #374151;
+  font-family: var(--font-satoshi-regular);
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-satoshi-regular);
+}
+
+.btn--grey {
+  padding: 18px 0;
+  border-radius: 21px;
+  color: var(--color-dark-grey);
+}
+
+.factory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Scroll Bar */
+
+/* Scrollbar styles */
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #fff var(--color-primary-dark);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--color-primary-dark);
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 20px;
+  /* border: 3px solid ; */
+}
+
+/* Modal */
+.modal__input {
+  width: 100%;
+}
+
+.modal__error {
+  color: red;
+  font-weight: 700;
+}
+
+/* Navbar */
+
+.navbar {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: var(--color-dark-grey);
+  font-weight: 700;
+}
+
+.navbar a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  margin: 0 20px;
+}
+
+/* Section */
+.section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(5deg, white 0%, var(--color-primary) 86%);
+  flex-direction: column;
+}
+
+.input-area {
+  margin: 150px;
+  background: white;
+  border-radius: 21px;
+  padding: 5px;
+  position: relative;
+  width: 50%;
+}
+
+.input-area input {
+  border: none;
+  background: var(--color-primary);
+  outline: none;
+  font-size: 21px;
+  color: var(--color-dark-grey);
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input {
+  -moz-appearance: textfield;
+  font-family: var(--font-satoshi-regular);
+}
+.input-area__box {
+  background: var(--color-primary);
+  padding: 20px 15px;
+  border-radius: 10px;
+  margin-bottom: 2.5px;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-satoshi-regular);
+}
+
+.input-area__box label {
+  margin-bottom: 12px;
+}
+
+.connect-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #2563eb; /* Green color, you can change this */
+  color: #fff; /* White text, you can change this */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: var(--font-satoshi-regular);
+  transition: background-color 0.3s ease;
+}
+
+.connect-button:hover {
+  background-color: #1d4ed8; /* Darker green color on hover, you can change this */
+}

@@ -1,3 +1,3 @@
-# Todo List
+# TodoList
 
-A simple Todo List with an internal collection array of Todos. We can add, modify, and retrieve Todos.
+A simple TodoList app where users can add & mark todo's as completed
