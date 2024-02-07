@@ -1,3 +1,3 @@
 # DReddit
 
-A decentralized application enabling users to share content and engage in voting by either upvoting or downvoting each others post.
+Decentralized social media platform where users can create post, upvote & downvote on Posts

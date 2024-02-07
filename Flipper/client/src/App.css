@@ -1,0 +1,415 @@
+#root {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+}
+
+body {
+  background-color: #090d23;
+  transition: background-color 0.8s ease;
+  height: 100%;
+}
+
+.container {
+  display: grid;
+  height: 100%;
+}
+
+.modal {
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px 30px 0px 0px;
+}
+
+.loader {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-left: 100px;
+}
+
+.wrapper.noClick {
+  cursor: not-allowed;
+}
+
+#checkbox {
+  display: none;
+}
+
+.noClick {
+  cursor: not-allowed;
+}
+
+.svg.noClick {
+  cursor: not-allowed;
+}
+
+.svg {
+  cursor: pointer;
+}
+
+.effect-circ {
+  transform-origin: 100px 100px;
+  transform: scale(0);
+  fill: #ffb300;
+  opacity: 0;
+}
+
+.sun {
+  transform-origin: 100px 100px;
+  transform: scale(1);
+  fill: #e0e0e0;
+  transition: fill 0.8s ease;
+}
+
+.craters {
+  transform-origin: 100px 100px;
+  transform: scale(1);
+  opacity: 1;
+  transition: transform 0.8s ease;
+  transition: opacity 0.8s ease;
+}
+
+.clouds {
+  transform: translate(200px, 0);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+.stars {
+  transition: opacity 2s ease;
+  opacity: 1;
+}
+
+.explosion {
+  transform-origin: 100px 100px;
+  fill: #ff9800;
+  opacity: 0;
+  transform: translate(0, 0) scale(0);
+}
+
+/* When checked */
+#checkbox:checked + label > .svg {
+  & .effect-circ {
+    animation: circleAnimation 0.2s linear;
+  }
+  & .sun {
+    fill: #ffc107;
+    animation: iconAnimation 0.2s linear;
+  }
+  & .craters {
+    transform: scale(0);
+    opacity: 0;
+  }
+  & .clouds {
+    transform: translate(0, 0);
+    opacity: 1;
+    transition: all 0.4s cubic-bezier(0, 1.51, 0.72, 0.96);
+  }
+  & .stars {
+    transition: opacity 0.4s ease;
+    opacity: 0;
+  }
+  & .northWestExplosion {
+    animation: northWestExplosionAnimation 0.4s linear;
+  }
+  & .northExplosion {
+    animation: northExplosionAnimation 0.4s linear;
+  }
+  & .northEastExplosion {
+    animation: northEastExplosionAnimation 0.4s linear;
+  }
+  & .eastExplosion {
+    animation: eastExplosionAnimation 0.4s linear;
+  }
+  & .southEastExplosion {
+    animation: southEastExplosionAnimation 0.4s linear;
+  }
+  & .southExplosion {
+    animation: southExplosionAnimation 0.4s linear;
+  }
+  & .southWestExplosion {
+    animation: southWestExplosionAnimation 0.4s linear;
+  }
+  & .westExplosion {
+    animation: westExplosionAnimation 0.4s linear;
+  }
+}
+
+/* KEYFRAMES */
+
+@keyframes circleAnimation {
+  50% {
+    transform: scale(0.4);
+    opacity: 0.2;
+  }
+  70% {
+    transform: scale(0.8);
+    opacity: 0.5;
+    fill: transparent;
+    stroke: #ffb300;
+    stroke-width: 4px;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+    fill: transparent;
+  }
+}
+
+@keyframes iconAnimation {
+  50% {
+    transform: scale(0.3);
+  }
+  70% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Explosions
+@keyframes northWestExplosionAnimation {
+  70% {
+    transform: translate(-24px, -24px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-30px, -30px) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes northExplosionAnimation {
+  70% {
+    transform: translate(0px, -34px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0px, -42px) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes northEastExplosionAnimation {
+  70% {
+    transform: translate(24px, -24px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(30px, -30px) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes eastExplosionAnimation {
+  70% {
+    transform: translate(34px, 0px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(42px, 0px) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes southEastExplosionAnimation {
+  70% {
+    transform: translate(24px, 24px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(30px, 30px) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes southExplosionAnimation {
+  70% {
+    transform: translate(0, 34px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 42px) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes southWestExplosionAnimation {
+  70% {
+    transform: translate(-24px, 24px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-30px, 30px) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes westExplosionAnimation {
+  70% {
+    transform: translate(-34px, 0px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-42px, 0px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Navbar */
+
+.navbar {
+  position: sticky;
+  padding: 0 20px;
+  top: 0;
+  display: flex;
+  margin-bottom: 50px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid hsl(219, 9%, 45%, 0.25);
+}
+
+.nav__header {
+  display: flex;
+  align-items: center;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.nav__links a {
+  text-decoration: none;
+  color: var(--color-Dark-grayish-blue);
+}
+
+.nav__links a {
+  cursor: pointer;
+  padding: 2rem 0;
+  margin: 0 1.5rem;
+  background-image: linear-gradient(0deg, #2563eb, #2563eb);
+  background-size: 0 5px, auto;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  transition: all 0.2s ease-out;
+  color: black;
+}
+
+.nav__links a:hover {
+  background-size: 100% 5px, auto;
+}
+
+.navbar__logo {
+  width: 50px;
+  font-size: 40px;
+  font-weight: 700;
+  color: black;
+}
+
+@media screen and (max-width: 900px) {
+  .navbar__logo {
+    width: 60px;
+    font-size: 40px;
+  }
+
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .nav__links {
+    position: absolute;
+    flex-direction: column;
+    height: calc(100vh - 62.65px);
+    top: 62.65px;
+    left: -500px;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    z-index: 20;
+    justify-content: flex-start;
+    width: 50vw;
+    row-gap: 5%;
+    padding: 2rem 2rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nav__burger div {
+    width: 20px;
+    border-bottom: 4px solid black;
+  }
+
+  .nav__burger {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 2rem;
+  }
+
+  .nav__burger--close div:nth-of-type(2) {
+    display: none;
+  }
+
+  .nav__burger--close div:nth-of-type(1) {
+    transition: all 0.2s;
+    transform: rotate(45deg);
+    position: relative;
+    top: 8.1px;
+  }
+  .nav__burger--close div:nth-of-type(3) {
+    transition: all 0.2s;
+    transform: rotate(-45deg);
+    position: relative;
+    bottom: 8.1px;
+  }
+
+  .nav__links--expanded {
+    left: 0;
+  }
+
+  .nav__links a {
+    padding: 0.5rem;
+    margin: 1rem 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .nav__links a {
+    margin: 0 2rem;
+  }
+
+  .navbar__balance {
+    font-size: 15px;
+  }
+
+  .navbar {
+    padding: 0 2rem;
+  }
+}
+
+.navbar .connect-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #2563eb; /* Green color, you can change this */
+  color: #fff; /* White text, you can change this */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: var(--font-satoshi-regular);
+  transition: background-color 0.3s ease;
+  height: 50px;
+}
+
+.navbar .connect-button:hover {
+  background-color: #1d4ed8; /* Darker green color on hover, you can change this */
+}
