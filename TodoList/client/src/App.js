@@ -15,8 +15,6 @@ function App() {
   const [ownerAddress, setOwnerAddress] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log(ownerAddress);
-
   // Loaders
   const [loading, setLoading] = useState(true);
   const [adding, setAdding] = useState(false);
@@ -42,7 +40,6 @@ function App() {
     try {
       const { todos } = await logic.GetTodos();
 
-      todos.reverse();
       setTodos(todos);
       setLoading(false);
     } catch (error) {
@@ -69,7 +66,7 @@ function App() {
       toastInfo("Adding Todo ...");
 
       const { addedTodo } = await logic.AddTodo(wallet, inputTodo);
-      setTodos([addedTodo, ...todos]);
+      setTodos([...todos, addedTodo]);
 
       toastSuccess("Successfully Added");
       setInputTodo("");
@@ -86,7 +83,6 @@ function App() {
       setMarking(id);
 
       await logic.MarkTodoCompleted(wallet, id);
-
       const tTodos = [...todos];
       tTodos[id].completed = true;
       setTodos(tTodos);

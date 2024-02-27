@@ -20,8 +20,8 @@ const ConnectModal = ({
         return setError("Incorrect mnemonic");
       }
 
-      const wallet = new Wallet(provider);
-      await wallet.fromMnemonic(mnemonic, account);
+      const wallet = await Wallet.fromMnemonic(mnemonic, account);
+      wallet.connect(provider);
       updateWallet(wallet);
 
       setError("");

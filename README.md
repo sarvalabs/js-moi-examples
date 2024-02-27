@@ -79,15 +79,21 @@ to fork this repository, make your changes, and submit a pull request.
 
 ### In the client Directory
 
-1. If the client directory has a `.env.example` file, then:
-
-   - Create a `.env` file and paste the required fields referring to `.env.example`.
-
-2. Install dependencies for the client:
+1. Install dependencies for the client:
 
    ```bash
    npm install
    ```
+
+2. Navigate to the client/src/interface/logic.js
+
+   And there if you see
+
+   ```javascript
+   logicId = "paste your logicId";
+   ```
+
+   Then paste your deployed logicId
 
 3. Start the app:
    ```bash

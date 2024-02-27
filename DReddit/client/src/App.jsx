@@ -44,7 +44,7 @@ function App() {
 
   const getUserVote = async (posts) => {
     for (let i = 0; i < posts.length; i++) {
-      const { vote } = await logic.GetUserVote(wallet, posts[i].id);
+      const { vote } = await logic.GetUserVote(wallet.address, posts[i].id);
       posts[i].usersVote = vote;
     }
     return posts;
