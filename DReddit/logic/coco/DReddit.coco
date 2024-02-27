@@ -118,8 +118,6 @@ endpoint invokable GetPosts() -> (posts []Post):
 
 // getUsersVote() is an invokable endpoint to retrieve
 // the vote of the current user for a specific post (id)
-endpoint invokable GetUserVote(id U64) -> (vote U64):
-    var user Address = Address(Sender)
-    
+endpoint invokable GetUserVote(id U64, user Address) -> (vote U64): 
     observe votes <- DReddit.State.votes:
         vote = votes[user][id]
