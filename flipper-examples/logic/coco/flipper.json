@@ -1,0 +1,138 @@
+{
+  "syntax": "0.1.0",
+  "engine": {
+    "kind": "PISA",
+    "flags": []
+  },
+  "elements": [
+    {
+      "ptr": 0,
+      "kind": "state",
+      "data": {
+        "kind": "persistent",
+        "fields": [
+          {
+            "slot": 0,
+            "label": "value",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "ptr": 1,
+      "deps": [
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "Init!",
+        "kind": "deployer",
+        "accepts": [],
+        "returns": [],
+        "executes": {
+          "bin": []
+        }
+      }
+    },
+    {
+      "ptr": 2,
+      "deps": [
+        3,
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "Seed!",
+        "kind": "deployer",
+        "accepts": [
+          {
+            "slot": 0,
+            "label": "initial",
+            "type": "bool"
+          }
+        ],
+        "returns": [],
+        "executes": {
+          "asm": [
+            "CARGS $0",
+            "OBTAIN $1 &0",
+            "SETFLD $0 &0 $1",
+            "LDPTR1 $1 0x3",
+            "CALLR $0 $1 $0"
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 3,
+      "deps": [
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "set!",
+        "kind": "local",
+        "accepts": [
+          {
+            "slot": 0,
+            "label": "value",
+            "type": "bool"
+          }
+        ],
+        "returns": [],
+        "executes": {
+          "asm": [
+            "OBTAIN $0 &0",
+            "PSAVE $0 &0"
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 4,
+      "deps": [
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "Flip!",
+        "kind": "invokable",
+        "accepts": [],
+        "returns": [],
+        "executes": {
+          "asm": [
+            "PLOAD $0 &0",
+            "NOT $0 $0",
+            "PSAVE $0 &0"
+          ]
+        }
+      }
+    },
+    {
+      "ptr": 5,
+      "deps": [
+        0
+      ],
+      "kind": "routine",
+      "data": {
+        "name": "Get",
+        "kind": "invokable",
+        "accepts": [],
+        "returns": [
+          {
+            "slot": 0,
+            "label": "value",
+            "type": "bool"
+          }
+        ],
+        "executes": {
+          "asm": [
+            "PLOAD $0 &0",
+            "YIELD $0 &0"
+          ]
+        }
+      }
+    }
+  ]
+}

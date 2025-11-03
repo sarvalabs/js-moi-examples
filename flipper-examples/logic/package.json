@@ -1,0 +1,16 @@
+{
+  "name": "flipper-logic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "deploy.js",
+  "scripts": {
+    "compile": "cd coco && coco compile",
+    "deploy": "node deploy/flipper.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^16.3.1",
+    "js-moi-sdk": "^0.2.1-rc2"
+  }
+}
