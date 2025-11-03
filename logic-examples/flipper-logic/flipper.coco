@@ -1,0 +1,23 @@
+coco Flipper
+
+state logic:
+    value Bool
+
+endpoint deploy Init():
+    pass
+
+endpoint deploy Seed(initial Bool):
+    set(value: initial)
+
+endpoint Get() -> (value Bool):
+    observe value <- Flipper.Logic.value
+
+endpoint dynamic Set(value Bool):
+    set(value: value)
+
+endpoint dynamic Toggle():
+    mutate value <- Flipper.Logic.value:
+        value = !value
+
+function dynamic set(value Bool):
+    mutate value -> Flipper.Logic.value

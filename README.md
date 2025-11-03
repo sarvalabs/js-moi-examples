@@ -22,14 +22,14 @@ Moi blockchain functionality seamlessly into your applications.
 To explore the Moi blockchain and gain insights into its activities, you can use the Moi block explorer. This tool
 allows you to visualize transactions, blocks, and other crucial information on the blockchain.
 
-- Block Explorer: [Voyage](https://voyage.moi.technology/)
+- Block Explorer: [Voyage](https://dev.voyage.moi.technology/)
 
 ## Testnet Faucet
 
 During your development and experimentation, you might need Moi tokens to test your applications. The Moi faucet on
 the testnet provides you with the necessary tokens to facilitate your testing.
 
-- Testnet Faucet: [Faucet](https://voyage.moi.technology/faucet/)
+- Testnet Faucet: [Faucet](https://dev.voyage.moi.technology/faucet/)
 
 ## Contribution
 
