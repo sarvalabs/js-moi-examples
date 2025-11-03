@@ -1,12 +1,8 @@
-import { getLogicDriver, JsonRpcProvider, Wallet } from "js-moi-sdk";
+import { getLogicDriver } from "js-moi-sdk";
+import { createWallet } from "../../utils/common";
 
 const readState = async () => {
-    const provider = new JsonRpcProvider("http://159.69.180.105:1600");
-    // Replace the mnemonic
-    const mnemonic = "head time shield olympic weather rose arrange sting slide fold tent soon";
-
-    const wallet = await Wallet.fromMnemonic(mnemonic, "m/44'/6174'/0'/0/1")
-    wallet.connect(provider)
+    const wallet = await createWallet();
 
     // Replace the logic id
     const logicId = "0x20000000bccb422cff28ddcc710f2bae59061b457df2846658cf42a300000000"

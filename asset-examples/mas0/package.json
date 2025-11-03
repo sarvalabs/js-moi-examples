@@ -1,0 +1,23 @@
+{
+  "name": "mas0",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "create": "node create.js",
+    "mint": "node mint.js",
+    "burn": "node burn.js",
+    "approve": "node approve.js",
+    "revoke": "node revoke.js",
+    "transfer": "node transfer.js",
+    "transfer-from": "node transfer-from.js",
+    "lockup": "node lockup.js",
+    "release": "node release.js"
+  },
+  "dependencies": {
+    "js-moi-sdk": "^0.7.0-rc1"
+  }
+}
